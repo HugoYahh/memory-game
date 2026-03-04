@@ -8,13 +8,35 @@ import './App.css'
 
 function App() {
   const [score,setScore] = useState(0)
-  const [bestSCore,setBestScore] = useState(0)
+  const [bestScore,setBestScore] = useState(0)
   const [gameState, setGameState] = useState('idle')
   const [difficulty,setDifficulty] = useState('medium')
   const [clickedCards, setClickedCards] = useState([])
   const [cards, setCards] = useState([])
 
+  function handleRestart(){
+    handleDifficultyChange(difficulty)
+  }
 
+  function handleGameOver(){
+    if (score > bestScore) setBestScore(score)
+    setGameState('gameover')
+  }
+
+  function handleScoreUpdate(id){
+    setScore(score+1)
+    setClickedCards([...clickedCards, id])
+    setCards(shuffle(cards))
+  }
+
+  const shuffle = (array) => {
+    const arr = [...array] 
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]]
+    }
+    return arr
+}
 
   const fetchCards = async(count) =>{
     const ids = []
@@ -52,10 +74,10 @@ function App() {
 
   return (
     <>
-      <Header></Header>
-      <InfoPanel score={score} gameState={gameState}></InfoPanel>
+      <Header score={score} bestScore={bestScore}></Header>
+      <InfoPanel score={score} gameState={gameState} onRestart={handleRestart}></InfoPanel>
       <DifficultySelector gameState={gameState} onDifficultyChange={handleDifficultyChange}></DifficultySelector>
-      <CardGrid></CardGrid>
+      <CardGrid cards={cards} gameState={gameState} onScoreUpdate={handleScoreUpdate} onGameOver={handleGameOver} clickedCards={clickedCards}></CardGrid>
     </>
   )
 }
