@@ -73,12 +73,13 @@ function App() {
   
 
   return (
-    <>
-      <Header score={score} bestScore={bestScore}></Header>
-      <InfoPanel score={score} gameState={gameState} onRestart={handleRestart}></InfoPanel>
-      <DifficultySelector gameState={gameState} onDifficultyChange={handleDifficultyChange}></DifficultySelector>
-      <CardGrid cards={cards} gameState={gameState} onScoreUpdate={handleScoreUpdate} onGameOver={handleGameOver} clickedCards={clickedCards}></CardGrid>
-    </>
+    
+      <div className="app">
+        <Header score={score} bestScore={bestScore}></Header>
+        <InfoPanel score={score} gameState={gameState} onRestart={handleRestart}></InfoPanel>
+        <DifficultySelector gameState={gameState} onDifficultyChange={handleDifficultyChange}></DifficultySelector>
+        <CardGrid cards={cards} gameState={gameState} onScoreUpdate={handleScoreUpdate} onGameOver={handleGameOver} clickedCards={clickedCards}></CardGrid>
+      </div>
   )
 }
 

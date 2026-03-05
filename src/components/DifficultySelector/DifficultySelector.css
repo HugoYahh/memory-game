@@ -15,7 +15,7 @@ button {
 }
 
 button:hover {
-    background-color: #23c483;
+    background-color: var(--card-bg);
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;
     transform: translateY(-7px);
@@ -23,4 +23,14 @@ button:hover {
 
 button:active {
     transform: translateY(-1px);
+}
+
+.difficulty-selector-container{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-container{
+    display: flex;
+    gap: 1rem;
 }
