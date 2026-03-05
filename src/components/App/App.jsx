@@ -15,7 +15,7 @@ function App() {
   const [cards, setCards] = useState([])
 
   function handleRestart(){
-    handleDifficultyChange(difficulty)
+    setGameState('idle')
   }
 
   function handleGameOver(){
@@ -24,10 +24,14 @@ function App() {
   }
 
   function handleScoreUpdate(id){
-    setScore(score+1)
+    const newScore = score + 1
+    setScore(newScore)
     setClickedCards([...clickedCards, id])
     setCards(shuffle(cards))
-  }
+    if(newScore >= cards.length){
+        setGameState('win')
+    }
+}
 
   const shuffle = (array) => {
     const arr = [...array] 
